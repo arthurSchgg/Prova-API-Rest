@@ -7,7 +7,7 @@ import br.com.avaliacao.api_telemetria.entity.Setor;
 import org.springframework.stereotype.Component;
 
 /**
- * Classe responsável por mapear a entidade setor e fazer as conversão dela
+ * Classe responsável por mapear a entidade motor e fazer as conversão dela
  *
  */
 @Component
@@ -15,6 +15,7 @@ public class MotorMapper {
 
     /**
      * Método responsável pela criação de um novo motor
+     *
      * @param dto {@link MotorRequestDTO} faz a conversão para a requisição do usuário
      * @return Uma criação de uma entidade
      */
@@ -37,6 +38,7 @@ public class MotorMapper {
 
     /**
      * Método responsável pela conversão de uma entity para o DTO
+     *
      * @param entity Buscada pelo usuário
      * @return Um novo DTO pegando o que o usuário definiu
      */

@@ -26,6 +26,7 @@ public class SetorService {
 
     /**
      * Faz a criação de um novo setor
+     *
      * @param dto {@link SetorRequestDTO} Pega os dados da requisição
      * @return Um setor cadastrado
      */
@@ -41,6 +42,7 @@ public class SetorService {
 
     /**
      * Lista todos os setores cadastrados
+     *
      * @param pageable Serve para fazer uma limitação da listagem
      * @return Todos os setores cadastrados
      */
@@ -52,6 +54,7 @@ public class SetorService {
 
     /**
      * Busca um setor pelo ID
+     *
      * @param id Identificador único
      * @return O Setor cujo tem o mesmo ID
      */
@@ -64,7 +67,8 @@ public class SetorService {
 
     /**
      * Atualiza completamente um setor
-     * @param id Identificador único
+     *
+     * @param id  Identificador único
      * @param dto {@link SetorRequestDTO} Pega os dados da requisição
      * @return Um setor atualizado
      */

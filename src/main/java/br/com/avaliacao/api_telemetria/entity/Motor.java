@@ -3,11 +3,12 @@ package br.com.avaliacao.api_telemetria.entity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
- *  Entidade que representa o motores
+ * Entidade que representa o motores
  *
  */
 @Entity

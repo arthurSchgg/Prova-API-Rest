@@ -7,16 +7,17 @@ import java.time.LocalDate;
 
 /**
  * Classe responsável por mandar a resposta da requisição do usuário do motor
- * @param id Identificador único
- * @param setorId Identificador do setor
- * @param setorNome Nome do setor
- * @param codigoAtivo Código ativo do motor
- * @param fabricante Fabricante do motor
- * @param modelo Modelo do motor
- * @param potenciaKw Potência em KW
- * @param rpmNominal RPM nominal
+ *
+ * @param id             Identificador único
+ * @param setorId        Identificador do setor
+ * @param setorNome      Nome do setor
+ * @param codigoAtivo    Código ativo do motor
+ * @param fabricante     Fabricante do motor
+ * @param modelo         Modelo do motor
+ * @param potenciaKw     Potência em KW
+ * @param rpmNominal     RPM nominal
  * @param dataInstalacao Data de instalação
- * @param statusAtual Status atual do motor
+ * @param statusAtual    Status atual do motor
  */
 public record MotorResponseDTO(
 

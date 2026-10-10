@@ -10,14 +10,15 @@ import java.time.LocalDate;
 
 /**
  * Classe responsável por pegar a requisição do usuário para o motor
- * @param setorId Identificador do setor
- * @param codigoAtivo Código do motor
- * @param fabricante Fabricante do motor
- * @param modelo Modelo do motor
- * @param potenciaKw Potência em KW
- * @param rpmNominal RPM nominal
+ *
+ * @param setorId        Identificador do setor
+ * @param codigoAtivo    Código do motor
+ * @param fabricante     Fabricante do motor
+ * @param modelo         Modelo do motor
+ * @param potenciaKw     Potência em KW
+ * @param rpmNominal     RPM nominal
  * @param dataInstalacao Data de instalação
- * @param statusAtual Status atual do motor
+ * @param statusAtual    Status atual do motor
  */
 public record MotorRequestDTO(
 
@@ -63,7 +64,7 @@ public record MotorRequestDTO(
 
         @Schema(
                 description = "Data de instalação",
-                example = "09/10/2026"
+                example = "2026-10-09"
         )
         LocalDate dataInstalacao,
 

@@ -6,11 +6,12 @@ import jakarta.validation.constraints.Size;
 
 /**
  * Classe responsável por pegar a requisição do usuário para o setor
- * @param nome Nome do Setor
+ *
+ * @param nome        Nome do Setor
  * @param localizacao Localização do setor
  */
 @Schema(description = "Requisição do usuário de um setor")
-public record SetorRequestDTO (
+public record SetorRequestDTO(
         @NotBlank(message = "O nome do setor é obrigatório")
         @Size(max = 100, message = "O nome do setor deve ter no máximo 100 caracteres")
         @Schema(
@@ -25,6 +26,6 @@ public record SetorRequestDTO (
                 example = "Chão de fábrica"
         )
         String localizacao
-){
+) {
 
 }

@@ -4,8 +4,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Classe responsável por mandar a resposta da requisição do usuário do setor
- * @param id Identificador único do Setor
- * @param nome Nome do Setor
+ *
+ * @param id          Identificador único do Setor
+ * @param nome        Nome do Setor
  * @param localizacao Localização do setor
  */
 public record SetorResponseDTO(

@@ -31,6 +31,7 @@ public class MotorService {
 
     /**
      * Faz a criação de um novo motor
+     *
      * @param dto {@link MotorRequestDTO} Pega os dados da requisição
      * @return Um motor cadastrado
      */
@@ -48,6 +49,7 @@ public class MotorService {
 
     /**
      * Lista todos os motores
+     *
      * @param pageable Serve para fazer a limitação da lista
      * @return Todos os motores
      */
@@ -59,6 +61,7 @@ public class MotorService {
 
     /**
      * Faz a busca pelo ID de um motor
+     *
      * @param id Identificador único do motor
      * @return O motor cujo ID é o mesmo do buscado
      */
@@ -71,6 +74,7 @@ public class MotorService {
 
     /**
      * Faz a busca pelo código ativo de um motor
+     *
      * @param codigoAtivo Código que está no motor
      * @return O motor cujo código ativo é o mesmo do buscado
      */
@@ -83,7 +87,8 @@ public class MotorService {
 
     /**
      * Atualiza completamente um motor
-     * @param id Identificador único do motor
+     *
+     * @param id  Identificador único do motor
      * @param dto {@link MotorRequestDTO} Pega os dados da requisição
      * @return Um motor atualizado
      */
@@ -114,7 +119,8 @@ public class MotorService {
 
     /**
      * Atualiza o status do motor
-     * @param id Identificador único do motor
+     *
+     * @param id  Identificador único do motor
      * @param dto {@link MotorStatusUpdateDTO} faz a atualização do status
      * @return O motor com o status atualizado
      */
@@ -129,6 +135,7 @@ public class MotorService {
 
     /**
      * Busca um setor pelo ID
+     *
      * @param setorId Identificador do Setor
      * @return A confirmação se encontrou o setor
      */

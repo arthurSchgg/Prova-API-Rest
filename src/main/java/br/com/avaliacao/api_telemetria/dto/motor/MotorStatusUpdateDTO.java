@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 
 /**
  * Faz a atualização do status do motor
+ *
  * @param statusAtual Status atual do motor
  */
 public record MotorStatusUpdateDTO(

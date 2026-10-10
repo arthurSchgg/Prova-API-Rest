@@ -32,7 +32,7 @@ public class SetorController {
     }
 
     @Operation(
-        summary = "Cria um setor"
+            summary = "Cria um setor"
     )
     @ApiResponses(value = {
             @ApiResponse(
@@ -52,7 +52,7 @@ public class SetorController {
             )
     })
     @PostMapping
-    public ResponseEntity<SetorResponseDTO> criar(@RequestBody (required = true) SetorRequestDTO requestDTO) {
+    public ResponseEntity<SetorResponseDTO> criar(@RequestBody(required = true) SetorRequestDTO requestDTO) {
         SetorResponseDTO novoSetor = service.criar(requestDTO);
 
         URI uri = ServletUriComponentsBuilder
@@ -135,7 +135,7 @@ public class SetorController {
             )
     })
     @PutMapping("/{id}")
-    public ResponseEntity<SetorResponseDTO> atualizar(@RequestBody (required = true) SetorRequestDTO requestDTO,
+    public ResponseEntity<SetorResponseDTO> atualizar(@RequestBody(required = true) SetorRequestDTO requestDTO,
                                                       @PathVariable Integer id) {
         return ResponseEntity.ok(service.atualizar(id, requestDTO));
     }

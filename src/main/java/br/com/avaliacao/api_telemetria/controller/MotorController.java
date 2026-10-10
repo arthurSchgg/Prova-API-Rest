@@ -2,8 +2,10 @@ package br.com.avaliacao.api_telemetria.controller;
 
 import br.com.avaliacao.api_telemetria.dto.motor.MotorRequestDTO;
 import br.com.avaliacao.api_telemetria.dto.motor.MotorResponseDTO;
+import br.com.avaliacao.api_telemetria.dto.motor.MotorStatusUpdateDTO;
 import br.com.avaliacao.api_telemetria.service.MotorService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -12,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +34,7 @@ public class MotorController {
     }
 
     @Operation(
-            description = "Faz a criação de um motor"
+            summary = "Faz a criação de um motor"
     )
     @ApiResponses(value = {
             @ApiResponse(
@@ -64,13 +67,13 @@ public class MotorController {
     }
 
     @Operation(
-            description = "Lista todos os motores"
+            summary = "Lista todos os motores"
     )
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
                     description = "Motores listados com sucesso",
-                    content = @Content(schema = @Schema(implementation = MotorController.class))
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = MotorController.class)))
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -84,12 +87,12 @@ public class MotorController {
             )
     })
     @GetMapping
-    public ResponseEntity<Page<MotorResponseDTO>> listarTodos(@PageableDefault (size = 10)Pageable pageable) {
+    public ResponseEntity<Page<MotorResponseDTO>> listarTodos(@PageableDefault(size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
         return ResponseEntity.ok(service.listarTodos(pageable));
     }
 
     @Operation(
-            description = "Busca um motor pelo ID"
+            summary = "Busca um motor pelo ID"
     )
     @ApiResponses(value = {
             @ApiResponse(
@@ -114,7 +117,7 @@ public class MotorController {
     }
 
     @Operation(
-            description = "Busca um motor pelo seu código ativo"
+            summary = "Busca um motor pelo seu código ativo"
     )
     @ApiResponses(value = {
             @ApiResponse(
@@ -133,18 +136,18 @@ public class MotorController {
                     content = @Content
             )
     })
-    @GetMapping("")
-    public ResponseEntity<MotorResponseDTO> buscarPorCodigoAtivo(@Valid @PathVariable String codigoAtivo) {
+    @GetMapping("/buscar/")
+    public ResponseEntity<MotorResponseDTO> buscarPorCodigoAtivo(@Valid @PathVariable @RequestParam String codigoAtivo) {
         return ResponseEntity.ok(service.buscarPorCodigoAtivo(codigoAtivo));
     }
 
     @Operation(
-            description = "Faz a criação de um motor"
+            summary = "Atualiza um motor"
     )
     @ApiResponses(value = {
             @ApiResponse(
-                    responseCode = "201",
-                    description = "Motor criado com sucesso",
+                    responseCode = "200",
+                    description = "Motor atualizado com sucesso",
                     content = @Content(schema = @Schema(implementation = MotorController.class))
             ),
             @ApiResponse(
@@ -158,18 +161,18 @@ public class MotorController {
                     content = @Content
             )
     })
-    @PutMapping
-    public void atualizar() {
-
+    @PutMapping("/{id}")
+    public ResponseEntity<MotorResponseDTO> atualizar(@RequestBody(required = true) MotorRequestDTO requestDTO, @PathVariable Integer id) {
+        return ResponseEntity.ok(service.atualizar(id, requestDTO));
     }
 
     @Operation(
-            description = "Faz a criação de um motor"
+            summary = "Atualiza o status de um motor"
     )
     @ApiResponses(value = {
             @ApiResponse(
-                    responseCode = "201",
-                    description = "Motor criado com sucesso",
+                    responseCode = "200",
+                    description = "Motor atualizado com sucesso",
                     content = @Content(schema = @Schema(implementation = MotorController.class))
             ),
             @ApiResponse(
@@ -183,8 +186,8 @@ public class MotorController {
                     content = @Content
             )
     })
-    @PatchMapping
-    public void atualizarStatus() {
-
+    @PatchMapping("/{id}")
+    public ResponseEntity<MotorResponseDTO> atualizarStatus(@Valid @PathVariable Integer id, MotorStatusUpdateDTO statusUpdateDTO) {
+        return ResponseEntity.ok(service.atualizarStatus(id, statusUpdateDTO));
     }
 }

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- *  Entidade que representa o setores
+ * Entidade que representa o setores
  *
  */
 @Entity

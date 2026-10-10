@@ -14,6 +14,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Classe que faz as regras de negócio dos alertas
+ */
 @Service
 public class AlertaMotorService {
     private final AlertaMotorRepository alertaRepository;
@@ -26,6 +29,12 @@ public class AlertaMotorService {
         this.alertaMapper = alertaMapper;
     }
 
+    /**
+     * Faz a criação de um alerta
+     *
+     * @param dto {@link AlertaRequestDTO} Pega os dados da requisição
+     * @return Um alerta cadastrado
+     */
     @Transactional
     public AlertaResponseDTO criar(AlertaRequestDTO dto) {
         Motor motor = motorRepository.findById(dto.motorId())
@@ -35,18 +44,38 @@ public class AlertaMotorService {
         return alertaMapper.toDTO(alertaRepository.save(alerta));
     }
 
+    /**
+     * Lista todos os alertas
+     *
+     * @param pageable Serve para fazer a limitação da lista
+     * @return Todos os alertas
+     */
     @Transactional(readOnly = true)
     public Page<AlertaResponseDTO> listarTodos(Pageable pageable) {
         return alertaRepository.findAll(pageable)
                 .map(alertaMapper::toDTO);
     }
 
+    /**
+     * Lista os alertas por status de resolução
+     *
+     * @param resolvido Verifica a resolução
+     * @param pageable  Serve para fazer a limitação da lista
+     * @return Os alertas por status de resolução
+     */
     @Transactional(readOnly = true)
     public Page<AlertaResponseDTO> listarPorStatusResolucao(Boolean resolvido, Pageable pageable) {
         return alertaRepository.findByResolvidoOrderByDataAlertaDesc(resolvido, pageable)
                 .map(alertaMapper::toDTO);
     }
 
+    /**
+     * Faz a busca do historico pelo ID do motor
+     *
+     * @param motorId  Identificador do motor
+     * @param pageable Serve para fazer a limitação da lista
+     * @return O historico cuso ID do motor é o mesmo do buscado
+     */
     @Transactional(readOnly = true)
     public Page<AlertaResponseDTO> buscarPorMotor(Integer motorId, Pageable pageable) {
         if (!motorRepository.existsById(motorId)) {
@@ -56,6 +85,13 @@ public class AlertaMotorService {
                 .map(alertaMapper::toDTO);
     }
 
+    /**
+     * Atualiza o status de resolução
+     *
+     * @param id  Identificador único do alerta
+     * @param dto {@link AlertaResolucaoDTO} Verifica a resolução pelo DTO
+     * @return O alerta com a resolução atualizada
+     */
     @Transactional
     public AlertaResponseDTO atualizarStatusResolucao(Integer id, AlertaResolucaoDTO dto) {
         AlertaMotor alerta = alertaRepository.findById(id)

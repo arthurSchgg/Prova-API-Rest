@@ -13,6 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Classe que faz as regras de negócio dos historicos
+ */
 @Service
 public class TelemetriaService {
     private final HistoricoTelemetriaRepository telemetriaRepository;
@@ -25,6 +28,12 @@ public class TelemetriaService {
         this.telemetriaMapper = telemetriaMapper;
     }
 
+    /**
+     * Faz o registro dos historicos
+     *
+     * @param dto {@link TelemetriaRequestDTO} pega os dados da requisição
+     * @return Um novo registro no historico
+     */
     @Transactional
     public TelemetriaResponseDTO registrar(TelemetriaRequestDTO dto) {
         Motor motor = motorRepository.findById(dto.motorId())
@@ -36,12 +45,24 @@ public class TelemetriaService {
         return telemetriaMapper.toDTO(salva);
     }
 
+    /**
+     * Lista todos os historicos
+     *
+     * @param pageable Serve para fazer a limitação da lista
+     * @return Todos os historicos
+     */
     @Transactional(readOnly = true)
     public Page<TelemetriaResponseDTO> listarTodos(Pageable pageable) {
         return telemetriaRepository.findAll(pageable)
                 .map(telemetriaMapper::toDTO);
     }
 
+    /**
+     * Faz a busca pelo ID de um historico
+     *
+     * @param id Identificador único do historico
+     * @return O historico cujo ID é o mesmo do buscado
+     */
     @Transactional(readOnly = true)
     public TelemetriaResponseDTO buscarPorId(Long id) {
         return telemetriaRepository.findById(id)
@@ -49,6 +70,13 @@ public class TelemetriaService {
                 .orElseThrow(() -> new EntityNotFoundException("Registro de telemetria não encontrado para o ID: " + id));
     }
 
+    /**
+     * Faz a busca do historico pelo ID do motor
+     *
+     * @param motorId  Identificador do motor
+     * @param pageable Serve para fazer a limitação da lista
+     * @return O historico cuso ID do motor é o mesmo do buscado
+     */
     @Transactional(readOnly = true)
     public Page<TelemetriaResponseDTO> buscarPorMotor(Integer motorId, Pageable pageable) {
         if (!motorRepository.existsById(motorId)) {
